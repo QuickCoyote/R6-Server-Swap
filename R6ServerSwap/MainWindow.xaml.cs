@@ -45,7 +45,7 @@ namespace R6ServerSwap
 
                 gameSettingsLines = File.ReadLines(filePath).ToArray();
 
-                gameSettingsLines = gameSettingsLines.Select(line => line.Contains("DataCenterHint=") ? "DataCenterHint=playfab/" + desiredDataCenter : line).ToArray();
+                gameSettingsLines = gameSettingsLines.Select(line => line.Contains("DataCenterHint=") && !line.Contains("DataCenterHint =>") ? "DataCenterHint=playfab/" + desiredDataCenter : line).ToArray();
 
                 File.Delete(account + "\\GameSettings.ini");
                 File.WriteAllLines(account + "\\GameSettings.ini", gameSettingsLines);
